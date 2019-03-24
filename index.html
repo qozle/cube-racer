@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<head>
+	<title>R U B I C K S  R A C E R</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!--  J Q U E R Y  C D N  -->
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+	<!--  B O O T S T R A P 4  J S  -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" integrity="sha384-pjaaA8dDz/5BgdFUPX6M/9SUZv4d12SUPF0axWc+VRZkx5xU3daN+lYb49+Ax+Tl" crossorigin="anonymous"></script>
+	<!--  B O O T S T R A P 4  C S S  -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<!--  F O N T  A W E S O M E  -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<!--  F A V E  I C O N  -->
+<!--
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+	<link rel="manifest" href="favicon/site.webmanifest">
+	<link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#eaeaea">
+-->
+	
+	<!--  M A I N  C S S  -->
+	<link rel='stylesheet' type="text/css" href='css/style.css'>
+	
+
+
+</head>
+<body>
+	
+	<!--  L O G I N  A N D  S I G N  U P  -->
+	
+	
+	<div class='container' id='index-content-container'>
+		<div class='row'>
+			<div class='col'>
+				<!--  L O G I N  F O R M -->
+				<h1 id='li-heading' class='text-center'>Login</h1>
+				<form id='login' class='text-center'>
+					<span id='li-userError'></span>
+					<br>
+					<input type='text' id='login-user' placeholder='E-mail or Handle'>
+					<br>
+					<span id='li-passwordError'></span>
+					<br>
+					<input type='text' id='login-password' placeholder="Password">
+					<br>
+					<input type='submit' id='login-button' value='Login'>
+				</form>
+				<br>
+				<!-- S I G N U P  F O R M  -->
+				<h1 id='su-heading' class='text-center'>Sign up</h1>
+				<form id='signup' class='text-center'>
+					<span id='su-firstNameError'></span>
+					<br>
+					<input type="text" id='firstname' placeholder='First Name'>
+					<br>
+
+					<span id='su-lastNameError'></span>
+					<br>
+					<input type='text' id='lastname' placeholder='Last Name'>
+					<br>
+					
+					<span id='su-handleError'></span>
+					<br>
+					<input type='text' id='handle' placeholder='Username'>
+					<br>
+
+					<span id='su-emailError'></span>
+					<br>
+					<input type='email' id='email' placeholder='E-mail'>
+					<br>
+
+					<span id='su-passwordError'></span>
+					<br>
+					<input type='text' id='password' placeholder='New Password'>
+					<br>
+					
+					<span id='su-passwordConfirmError'></span>
+					<br>
+					<input type='text' id='passwordConfirm' placeholder='Confirm Password'>
+					
+
+					<ul id='pswd-text' class='text-center'>
+						Password must fufill 3 of the following 4: 
+						<li>at least 1 upper case character</li>
+						<li>at least 1 lower case character </li>
+						<li>at least 1 numerical character</li>
+						<li>at least 1 special character</li>
+					</ul>
+
+					<h4>Birthday</h4>
+					<span id='bdayMonthError'></span>
+					<select class="custom-select mr-sm-2" id="bdayMonth">
+						<!-- use a loop to do this cleaner -->
+						<option selected>Month</option>
+						<option value="January">January</option>
+						<option value="February">February</option>
+						<option value="March">March</option>
+						<option value="April">April</option>
+						<option value="May">May</option>
+						<option value="June">June</option>
+						<option value="July">July</option>
+						<option value="August">August</option>
+						<option value="September">September</option>
+						<option value="October">October</option>
+						<option value="November">November</option>
+						<option value="December">December</option>
+					</select>
+					<span id='bdayDayError'></span>
+					<select class="custom-select mr-sm-2" id="bdayDay">
+						<option selected>Day</option>
+						<!-- use a loop to make this cleaner -->
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+					</select>
+					<span id='bdayYearError'></span>
+					<select class="custom-select mr-sm-2" id="bdayYear">
+						<!-- use a for loop to make this eaiser, this sucks -->
+						<option selected>Year</option>
+						<option value="2019">2019</option>
+						<option value="2018">2018</option>
+						<option value="2017">2017</option>
+						
+					</select>
+
+					<input type='submit' id='signup-button' value='Create Account'>        
+				</form>
+			</div>
+		</div>
+
+		<!--  M A I N  J S -->
+	<script src='/js/index.js'></script>
+	</div>
+	
+</body>

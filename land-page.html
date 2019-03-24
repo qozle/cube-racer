@@ -1,0 +1,41 @@
+<link rel='stylesheet' type="text/css" href='css/land-page.css'>
+
+<div class='container'>
+	<div class='row'>
+		<!--  S T O P W A T C H  -->
+		<div class='col'>
+			<p>Press the button to start the timer</p>
+			<br>
+			<span id='timer-text'>00:00:00</span>
+			<br>
+			<span>Press spacebar to start / stop timer</span>
+		</div>
+		<!--  R E C O R D E D  T I M E S  -->
+		<div class='col'>
+			<ol id='times-list'>
+			
+			</ol>
+		</div>
+		<div class='col'>
+			<ul id='stats'>
+				best
+				<li id='best'></li>
+				average
+				<li id='average'></li>
+				average of 5
+				<li id='average-of-5'></li>
+				average of 10
+				<li id='average-of-10'></li>
+				3 of 5
+				<li id='3-of-5'></li>
+				8 of 10
+				<li id='8-of-10'></li>
+			</ul>
+		</div>
+		
+	</div>
+</div>
+
+<script>
+	$.getScript('/js/land-page.js');
+</script>
