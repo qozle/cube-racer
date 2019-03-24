@@ -1,0 +1,17 @@
+E N D  G O A L: 
+
+Make a great looking and functional project to display in my portfolio.  Should demonstrate knowledge of fundamental web development skills and perhaps creativity.  
+
+
+let's get T E C H N I C A L:
+
+Uses a number of packages for authentication (passport, express-session, mysql) and uses Node.Js for a backend server, mysql as a database, and your mom as- ok oops.
+
+
+W H A T  S H O U L D  I T  L O O K  L I K E?:
+
+After sign in, user should land on the home page.  The home page will include stats about their friends (most recent solves, personal best, personal best average, et c), upcoming cubing events, and maybe blog posts?  Do I want to make a blog thing?  I'm imagining it to be almost like a light social networking platform but for cubing.  The home page should alse drop the user into a general chat room.  There will be options to start solving alone, or to make a new race room.  The race room feature will be implemented after I get the solo timer working fine and have insertion and recall into the database.  
+
+There should be a practice option for the cube timer and a recorded option.  Practice won't record the time- recorded will record the time.  If a time is recorded, it is recorded, so even if it's a mistake it goes in.  Should users have the option to remove times?  Only in practice, I think, for the recorded option users could just get rid of all their bad times.  Maybe they could flag a mistaken time as 'mistake' but that's already getting a little advanced.  
+
+Primary goal is to be able to record times and have them inserted into the db and queried and displayed after.  After that I can start implementing the more advanced features.  

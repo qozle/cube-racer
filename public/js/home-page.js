@@ -38,11 +38,21 @@ $(function(){
 				var newAverageOfFive = averageOfFive(times);
 				$('#average-of-5').text(newAverageOfFive.getMinutes() + ':' + newAverageOfFive.getSeconds() + ':' + newAverageOfFive.getMilliseconds())
 			}
-			//  3  OF  5
-//			if (times.length >= 5){
-//				var newThreeOfFive =  threeOfFive(times);
-//				$('#3-of-5').text(newThreeOfFive.getMinutes() + ':' + newThreeOfFive.getSeconds() + ':' + newThreeOfFive.getMilliseconds());				
-//			}
+			//  T H R E E  O F  F I V E
+			if (times.length >= 5){
+				var newThreeOfFive =  threeOfFive(times);
+				$('#3-of-5').text(newThreeOfFive.getMinutes() + ':' + newThreeOfFive.getSeconds() + ':' + newThreeOfFive.getMilliseconds());				
+			}
+			//  A V E R A G E  O F  T E N
+			if (times.length >= 10){
+				var newAverageOfTen = averageOfTen(times);
+				$('#average-of-10').text(newAverageOfTen.getMinutes() + ':' + newAverageOfTen.getSeconds() + ':' + newAverageOfTen.getMilliseconds())
+			}
+			//  E I G H T  O F  T E N 
+			if (times.length >= 10){
+				var newEightOfTen = eightOfTen(times);
+				$('#8-of-10').text(newEightOfTen.getMinutes() + ':' + newEightOfTen.getSeconds() + ':' + newEightOfTen.getMilliseconds());				
+			}
 		}
 	}
 
@@ -96,40 +106,73 @@ $(function(){
 	}
 	
 	//  T H R E E  O F  F I V E
-	//	function threeOfFive(listOfTimes){
-//		var fiveLastTimes = [];
-//		var average = 0;
-//		for (var i = 0; i < 4; i++){
-//			fiveLastTimes.push(listOfTimes[i]);
-//		}
-//		var bestTime = new Date();
-//		var worstTime = new Date(0);
-//		fiveLastTimes.forEach(function(timeOuter, index, array){
-//			console.log(timeOuter.getTime());
-//			console.log(timeOuter.getTime());
-//			if (timeOuter.getTime() < bestTime.getTime){
-//				bestTime = timeOuter;
-//			} else if(timeOuter.getTime > worstTime.getTime()){
-//				worstTime = timeOuter;
-//			}
-//			
-//		});
-//		console.log(bestTime.getTime());
-//		console.log(worstTime.getTime());
-//		fiveLastTimes.forEach(function(element, index, array){
-//			if (element.getTime() == bestTime.getTime() || element.getTime == worstTime.getTime){
-//				fiveLastTimes.pop[index];
-//			} else {
-//				average += element.getTime();
-//			}
-//			
-//		});
-//		
-//		average /= 3;
-//		return new Date(average);
-//	}
-	
+	function threeOfFive(listOfTimes){
+		var lastFiveTimes = [];
+		var average = 0;
+		//  Kind of sloppy- get the last five times,
+		//  turn them into ms so they can be sorted,
+		//  remove the first and last (highest and lowest)
+		//  add them all to the average sum, turn them back
+		//  into dates, and then return the average.  
+		for (var i = times.length; i > times.length -5; i--){
+			lastFiveTimes.push(times[i-1].getTime());
+		}
+		lastFiveTimes.sort();
+		lastFiveTimes.splice(4,1);
+		lastFiveTimes.splice(0,1);
+		lastFiveTimes.forEach(function(time, index){
+			average += time;
+			time = new Date(time);
+		});
+		average /= 3;
+		return new Date(average);
+		}
 
+	
+	//  A V E R A G E  O F  10 
+	function averageOfTen(listOftimes){
+		var lastTenTimes = [];
+		var average = 0;
+		//  This works fine, but just make sure that it pulls the
+		//  new values from the END of the array, or else you won't
+		//  get any of the new results. 
+		for(var i = times.length; i > times.length - 10; i--){
+			lastTenTimes.push(times[i - 1]);
+		}
+		lastTenTimes.forEach(function(time){
+			average += time.getTime();
+		});
+		average /= 10;
+		console.log(average);
+		return new Date(average);
+	}
+	
+	
+		//  E I G H T  O F  T E N
+	function eightOfTen(listOfTimes){
+		var lastTenTimes = [];
+		var average = 0;
+		//  Kind of sloppy- get the last five times,
+		//  turn them into ms so they can be sorted,
+		//  remove the first and last (highest and lowest)
+		//  add them all to the average sum, turn them back
+		//  into dates, and then return the average.  
+		for (var i = times.length; i > times.length - 10; i--){
+			lastTenTimes.push(times[i - 1].getTime());
+		}
+		lastTenTimes.sort();
+		lastTenTimes.splice(9,1);
+		lastTenTimes.splice(0,1);
+		lastTenTimes.forEach(function(time, index){
+			average += time;
+			time = new Date(time);
+		});
+		average /= 8;
+		return new Date(average);
+		}
+	
+	
+	
 });
 
 
