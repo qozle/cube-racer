@@ -1,3 +1,22 @@
-p {
-	font-size: 1.2em;
+body {
+	background-color: beige;
+}
+
+#pswd-text {
+	list-style: none;
+}
+
+#login {
+	margin-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px silver solid;
+}
+
+#su-heading {
+	margin-top: 15px;
+}
+
+#signup {
+	margin-top: 15px;
+	padding-bottom: 15px;
 }

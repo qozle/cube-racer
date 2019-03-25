@@ -41,56 +41,37 @@
 				<h1 id='li-heading' class='text-center'>Login</h1>
 				<form id='login' class='text-center'>
 					<span id='li-userError'></span>
-					<br>
 					<input type='text' id='login-user' placeholder='E-mail or Handle'>
-					<br>
 					<span id='li-passwordError'></span>
-					<br>
 					<input type='text' id='login-password' placeholder="Password">
-					<br>
 					<input type='submit' id='login-button' value='Login'>
 				</form>
-				<br>
+				
 				<!-- S I G N U P  F O R M  -->
 				<h1 id='su-heading' class='text-center'>Sign up</h1>
 				<form id='signup' class='text-center'>
 					<span id='su-firstNameError'></span>
-					<br>
 					<input type="text" id='firstname' placeholder='First Name'>
-					<br>
 
 					<span id='su-lastNameError'></span>
-					<br>
 					<input type='text' id='lastname' placeholder='Last Name'>
-					<br>
 					
 					<span id='su-handleError'></span>
-					<br>
 					<input type='text' id='handle' placeholder='Username'>
-					<br>
 
 					<span id='su-emailError'></span>
-					<br>
 					<input type='email' id='email' placeholder='E-mail'>
-					<br>
 
 					<span id='su-passwordError'></span>
-					<br>
 					<input type='text' id='password' placeholder='New Password'>
-					<br>
 					
 					<span id='su-passwordConfirmError'></span>
-					<br>
 					<input type='text' id='passwordConfirm' placeholder='Confirm Password'>
 					
-
-					<ul id='pswd-text' class='text-center'>
-						Password must fufill 3 of the following 4: 
-						<li>at least 1 upper case character</li>
-						<li>at least 1 lower case character </li>
-						<li>at least 1 numerical character</li>
-						<li>at least 1 special character</li>
-					</ul>
+					
+					<small id="passwordHelpBlock" class="form-text text-muted">
+						Password must fufill 3 of the following 4: 1) At least 1 upper case character, 2) At least 1 lower case character, 3) at least 1 numerical character, 4) at least one special character.
+					</small>
 
 					<h4>Birthday</h4>
 					<span id='bdayMonthError'></span>

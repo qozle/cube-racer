@@ -86,29 +86,34 @@ passport.use(new LocalStrategy(
 				return done(null, userData);
 			}
 		});
+		closeConnectToDatabase(connection);
 	}
 ));
 
 
 //  How passport will serialize the user data
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+	console.log('passport is serializing data')
+	done(null, user.id);
 });
 
 //  How passport will deserialize the user data
 passport.deserializeUser(function(id, done) {
+	console.log('passport is deserializing data')
 	var connection = connectToDatabase();
-	console.log(id);
 	connection.query("select * from users where id = ?", [id], function(error, results){
 		if (error){console.log(error);}
 		else {done(error, results[0]);}
 	});
+	closeConnectToDatabase(connection);
 });
 
 
 // add & configure middleware
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+//  Serve static content (css, images)
+app.use(express.static('/mnt/c/xampp/htdocs/projects/cube-racer/public'));
 app.use(session({
   genid: (req) => {
     return uuid() // use UUIDs for session IDs
@@ -129,36 +134,49 @@ app.use(passport.session());
 //  Root directory to serve content from
 const rootDir = {root: '/mnt/c/xampp/htdocs/projects/cube-racer'};
 
-//  Serve static content (css, images)
-app.use(express.static('/mnt/c/xampp/htdocs/projects/cube-racer/public'));
-
 app.get('/favicon.ico', (req, res) => {
 	res.sendFile('/favicon.ico', rootDir);
 });
 
 //  Serve player profile 'template'
-app.get('/:username', function(req, res){
+app.get('/users/:username', function(req, res){
 	res.sendFile('profile.html', rootDir);
 });
 
+//  Serve profile information
 app.post('/getProfile', (req, res) => {
 	var body = req.body;
+	var respData = [];
+	//  Get the player's basic profile info
+	
 	var connection = connectToDatabase();
-	connection.query('SELECT * FROM users WHERE handle = ?', [body.profile.replace('/','')], function(error, results){
+	connection.query('SELECT * FROM users WHERE handle = ?', [body.profile.replace('/users/','')], function(error, results){
 		if (error){console.log(error)}
 		if (!results[0]){
 			res.send("There's no user handle for " + body.profile)
 		} else if (results[0]){
-			console.log(results[0]);
-			res.send(results[0]);
+			respData.push(results[0]);
+			connection.query(`SELECT * FROM ${body.profile.replace('/users/','')};`, 
+			function(error, results){
+				if (error){console.log(error)}
+				respData.push(results);
+				res.send(respData);
+				
+			});
 		}
-	})
+		closeConnectToDatabase(connection);
+	});
+	
 });
+
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {
-  res.sendFile('/index.html', rootDir)
-})
+	if (req.isAuthenticated){
+		
+		res.sendFile('/index.html', rootDir)
+	}
+});
 
 //  Create the signup route
 app.get('/signup', (req, res) => {
@@ -174,21 +192,27 @@ app.post('/signup', (req, res, next) => {
 					  function(error, results, fields){
 		if (error){console.log(error)}
 		else {
-			console.log(results);
 			if (results[0]){res.send('email already in use')}
 			else {
+				//  Insert user info into database
 				connection.query('INSERT INTO users (id, email, password, firstname, lastname, bmonth, bday, byear, handle) values (?,?,?,?,?,?,?,?,?)',
 								[req.sessionID, body.email, body.password, body.firstname, body.lastname, body.bmonth, body.bday, body.byear, body.handle], 
 								function(error, fields, results){
 					if (error){console.log(error)}
+				});
+				
+				//  create a new table for the users scores
+				connection.query(`CREATE TABLE ${body.handle} (cube varchar(25), min int(3), sec int(3), ms int(4), date DATETIME);`, 
+								function(error, results){
+					if (error) {console.log(error)}
 					else {
 						res.send('account created!');
 					}
-
-				});
+				}); 
 			}
 		}
 	});
+	closeConnectToDatabase(connection);
 });
 
 //  login GET route
@@ -207,7 +231,29 @@ app.post('/login', (req, res, next) => {
 		  return res.sendFile('/home-page.html', rootDir);
 	  })
   })(req, res, next);
-})
+});
+
+//  logout route
+app.get('/logout', (req, res) => {
+	req.logout();
+	res.sendFile('/index.html', rootDir);
+});
+
+//  new time data to be inserted into the user's table
+app.post('/newTime', (req, res) => {
+	if(req.isAuthenticated()){
+		console.log("ok you're authenticated");
+		var user = req.user;
+		console.log('inside /newtime')
+		var connection = connectToDatabase();
+		connection.query(`INSERT INTO ${user.handle} (cube, min, sec, ms, date) VALUES ('3x3', '${req.body.mins}', '${req.body.secs}', '${req.body.ms}', NOW())`), function(error, results){
+			if (error) {console.log(error)}
+		}
+		closeConnectToDatabase(connection);
+	} else {
+		console.log("looks like no auth buddy");
+	}
+});
 
 
 //  Open them ears up

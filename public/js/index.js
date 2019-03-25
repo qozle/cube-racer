@@ -68,8 +68,6 @@ $(function(){
 				byear: bdayYear
 				
 			}
-			console.log('send some data over!');
-			//  This has ot be changed to ajax
 			$.ajax({
 				url: '/signup',
 				type: 'POST',

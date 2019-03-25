@@ -23,7 +23,22 @@ $(function(){
 			//  to the list of times, emit the data to the server, update the stats chart
 			console.log('stopping timer');
 			clearInterval(displayTimer);
-			
+			//  Send times over to the server to put into the database
+			$.ajax({
+				url: '/newTime',
+				type: 'POST', 
+				data: {
+					mins: lastTime.getMinutes(),
+					secs: lastTime.getSeconds(),
+					ms: lastTime.getMilliseconds()
+				},
+				success: (data) => {
+					console.log('new time inserted')
+				},
+				error: (error) => {
+					console.log(error);
+				}
+			});
 			$('#times-list').prepend('<li>' + lastTime.getMinutes() + ':' + lastTime.getSeconds() + ':' + lastTime.getMilliseconds() + '</li>');
 			times.push(lastTime);
 			//  B E S T  T I M E
@@ -62,6 +77,36 @@ $(function(){
 		$('#timer-text').text(lastTime.getMinutes() + ':' + lastTime.getSeconds() + ':' + lastTime.getMilliseconds());
 		console.log('updating time');
 	}
+	
+	
+	//   L O G  O U T 
+	$('#logoutButton').click(function(){
+		console.log('button clicked');
+		$.ajax({
+			url :'/logout',
+			type: 'GET',
+			success: function(data){
+				$('body').empty();
+				$('body').append(data);
+			}
+		});
+	});
+	
+	
+	//  view profile
+	$('#viewProfile').click(function(){
+		$.ajax({
+			url: '/users/lexsip237',
+			type: 'GET',
+			success: function(data){
+				$('body').empty();
+				$('body').append(data);
+			}, 
+			error: function(error){
+				console.log(error);
+			}
+		});
+	});
 	
 	
 	//  B E S T  T I M E
