@@ -1,10 +1,13 @@
 $(function(){
-	
+	var handle = localStorage.getItem('handle');
+	console.log(handle);
 	//  S T O P W A T C H 
 	var start = false;
 	var displayTimer;
 	var lastTime;
 	var times = [];
+	$('#nav-stats').attr('href', `/users/${handle}`);
+	
 	$(window).keyup(function(e){
 		if (e.keyCode == 32) {
 			e.preventDefault();
@@ -17,7 +20,7 @@ $(function(){
 			start = true;
 			console.log('starting timer');
 			var startTime = new Date();
-			displayTimer = setInterval(displayTime, 45, startTime);
+			displayTimer = setInterval(displayTime, 1, startTime);
 		} else if (start) {
 			//  Stop the timer, push the last time 
 			//  to the list of times, emit the data to the server, update the stats chart
@@ -39,8 +42,11 @@ $(function(){
 					console.log(error);
 				}
 			});
-			$('#times-list').prepend('<li>' + lastTime.getMinutes() + ':' + lastTime.getSeconds() + ':' + lastTime.getMilliseconds() + '</li>');
+			//  add time to the list of times
+			$('#times-list').prepend('<li>' + ('0' + lastTime.getMinutes()).slice(-2) + ':' + ('0' + lastTime.getSeconds()).slice(-2) + '.' + ('0' + lastTime.getMilliseconds()).slice(-3) + '</li>');
 			times.push(lastTime);
+			
+			//  Input into HTML table
 			//  B E S T  T I M E
 			var newBestTime = bestTime(times);
 			$('#best').text(newBestTime.getMinutes() + ':' + newBestTime.getSeconds() + ':' + newBestTime.getMilliseconds());
@@ -74,7 +80,9 @@ $(function(){
 	
 	function displayTime(startTime){
 		lastTime = new Date(new Date() - startTime);
-		$('#timer-text').text(lastTime.getMinutes() + ':' + lastTime.getSeconds() + ':' + lastTime.getMilliseconds());
+		$('#timer-text span:nth-child(1)').text(('0' + lastTime.getMinutes()).slice(-2) + ':'); 
+		$('#timer-text span:nth-child(2)').text(('0' + lastTime.getSeconds()).slice(-2) + '.');
+		$('#timer-text span:nth-child(3)').text(('00' + lastTime.getMilliseconds()).slice(-3));
 		console.log('updating time');
 	}
 	

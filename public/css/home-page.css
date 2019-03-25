@@ -1,3 +1,54 @@
 p {
 	text-align: center;
 }
+
+#timer-text {
+	height: auto;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	min-width: -webkit-min-content;
+	min-width: -moz-min-content;
+	min-width: min-content;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#timer-text span {
+	/* what the heck is define? */
+	width: {define width}
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font-weight: bold;
+	font-size: 6.3em;
+	margin: auto;
+}
+
+#times-heading {
+	text-align: center;
+	background-image: linear-gradient(blue, beige);
+}
+
+#times-list {
+	text-align: center;
+}
+
+#stats {
+	text-align: center;
+}
+
+#stats-heading {
+	text-align: center;
+	background-image: linear-gradient(blue, beige);
+}
+
+#logout-button {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+

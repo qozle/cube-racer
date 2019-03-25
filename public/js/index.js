@@ -1,8 +1,5 @@
 
 $(function(){
-//  Expose socket globally.  Bad idea...?
-
-	
 	//  On login form submit
 	$('#login').submit(function(e){
 		e.preventDefault();
@@ -20,8 +17,12 @@ $(function(){
 				type: 'POST',
 				data: loginData,
 				success: function(result){
+					console.log(result);
+					var html = result.html;
+					var user = result.user;
 					$('body').empty();
-					$('body').append(result);
+					$('body').append(html);
+					localStorage.handle = user;
 				},
 				error: function(error){
 					$('body').append(error);

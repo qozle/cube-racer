@@ -2,6 +2,18 @@ body {
 	background-color: beige;
 }
 
+#index-content-container {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#splash-text {
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 50px;
+	background-image: linear-gradient(blue, beige);
+}
+
 #pswd-text {
 	list-style: none;
 }
@@ -12,11 +24,16 @@ body {
 	border-bottom: 1px silver solid;
 }
 
-#su-heading {
-	margin-top: 15px;
-}
-
 #signup {
 	margin-top: 15px;
 	padding-bottom: 15px;
+}
+
+#signup-button {
+	margin-top: 10px;
+}
+
+#login-button {
+	margin-top: 10px;
+	
 }

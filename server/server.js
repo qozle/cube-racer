@@ -172,9 +172,20 @@ app.post('/getProfile', (req, res) => {
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {
-	if (req.isAuthenticated){
-		
-		res.sendFile('/index.html', rootDir)
+	if (req.isAuthenticated()){
+		res.sendFile('/home-page.html', rootDir);
+	} else {
+	
+		console.log('try logging in buddy');
+		res.sendFile('/index.html', rootDir);
+	}
+});
+
+app.get('/home-page', (req, res) =>{
+	if (req.isAuthenticated()){
+		res.sendFile('/home-page.html', rootDir);
+	} else {
+		res.send('sorry, no creds, you dont belong here');
 	}
 });
 
@@ -194,6 +205,7 @@ app.post('/signup', (req, res, next) => {
 		else {
 			if (results[0]){res.send('email already in use')}
 			else {
+				var connection = connectToDatabase();
 				//  Insert user info into database
 				connection.query('INSERT INTO users (id, email, password, firstname, lastname, bmonth, bday, byear, handle) values (?,?,?,?,?,?,?,?,?)',
 								[req.sessionID, body.email, body.password, body.firstname, body.lastname, body.bmonth, body.bday, body.byear, body.handle], 
@@ -228,15 +240,21 @@ app.post('/login', (req, res, next) => {
 	  if (!user){return res.redirect('/login');}
 	  req.login(user, (err) => {
 		  if (err){return next(err)};
-		  return res.sendFile('/home-page.html', rootDir);
+		  var respData = {
+			  html: fs.readFileSync('../home-page.html', 'utf8'),
+			  user: req.user.handle
+		  }
+		  return res.send(respData);
 	  })
   })(req, res, next);
 });
 
 //  logout route
 app.get('/logout', (req, res) => {
-	req.logout();
-	res.sendFile('/index.html', rootDir);
+	req.session.destroy(function(){
+		
+		res.sendFile('/index.html', rootDir);
+	});
 });
 
 //  new time data to be inserted into the user's table

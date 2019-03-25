@@ -15,3 +15,18 @@ After sign in, user should land on the home page.  The home page will include st
 There should be a practice option for the cube timer and a recorded option.  Practice won't record the time- recorded will record the time.  If a time is recorded, it is recorded, so even if it's a mistake it goes in.  Should users have the option to remove times?  Only in practice, I think, for the recorded option users could just get rid of all their bad times.  Maybe they could flag a mistaken time as 'mistake' but that's already getting a little advanced.  
 
 Primary goal is to be able to record times and have them inserted into the db and queried and displayed after.  After that I can start implementing the more advanced features.  
+
+=============================================================================
+
+
+3.25.2019
+
+What should the home page have on it?  
++  navbar: (what pages should there be?)
+- home
+- stats (profile)
+- site ranking stats
+- race page
++  chat room (hideable, can leave)
++  show your best time, best average
++  link to start / join race room
