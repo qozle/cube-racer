@@ -3,7 +3,7 @@ ajax version of rubicks-racer
 
 W i P
 
-This is a web app that serves three primary functions:
+<h3>This is a web app that serves three primary functions:</h3>
 
 1) Allow users to do timed rubicks cubes solves and record their data in a user profile which provides basic analytics and that others can see.  There are two modes: practice mode and official[sic] mode.  Practice mode doesn't record the times, while official does.
 
@@ -12,7 +12,7 @@ This is a web app that serves three primary functions:
 3) Allow users to join 'race rooms' which are chat rooms that will have a shared timer device on them, so that users can race each other or just hang out and solve together.  Room admin will be able to set the rules, i.e. inspection time, type of cube.  
 
 
-To install:
+<h3>To install:</h3>
 
 `$ npm install`
 
