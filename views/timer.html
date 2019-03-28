@@ -6,9 +6,9 @@
 <!--  S T O P W A T C H  -->
 <div class='col-12'>
 	<div id='timer-text'>
-		<span>00:</span>
-		<span>00.</span><span>000</span>
+		<span>00:</span><span>00.</span><span>000</span>
 	</div>
+	<span id='scramble'></span>
 	<p>Press spacebar to start / stop timer</p>
 </div>
 <!--  R E C O R D E D  T I M E S  -->
@@ -51,7 +51,10 @@
 	</table>
 		</div>
 	<script>
-	$.getScript('/js/stop-watch.js');
-	$.getScript('/js/timer.js');
+		//  This should almost definitely be promisey-stuff to ensure
+		//  that the scripts get loaded in the right order.  
+		$.getScript('/libs/time-stats.js');
+		$.getScript('/js/stop-watch.js');
+		$.getScript('/js/timer.js');
 	</script>
 </div>

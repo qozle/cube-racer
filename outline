@@ -45,4 +45,24 @@ A ranking system might be unrealistic at this point, I'm thinking.  It's just be
 
 The whole database idea in general I guess isn't so great?  I already made the profile page though, I may as well have it so you can search for users and choose to follow them.  That woul dbe a good demonstration of skill too.  
 
-So I think on the navbar and on the home page, I'll have a search field.  
+So I think on the navbar and on the home page, I'll have a search field. 
+=============================================================================
+
+2019.3.28
+
+I have an autocomplete search field that correctly pulls all of the handles from the database.  so now I need to make it do something when clicked.  it should bring you to the user's profile.  Then I can add things to the profile page like being able to follow someone and see their times on the home page.  
+
+How will that be accomplished?  the list of users that the current user is following will have to be stored somewhere with persistance.  I guess in the database, though I feel weird about storing too much info in there or making too many like separate tables?  I guess I could put it under the users table actually...
+
+No, I just looked it up, I think the best way to do this is to use an INNER JOIN on a new table.  Just learned about that.  I tried it out and it looks like it'll work.  
+
+I don't like the idea of it though, do I really want to make a followers thing?  I'm second guessing my idea now.  Do I really need to add new features?  I  mean I kind of like the race room idea.  at least it's a chat room where you can just hang out and solve together.  It needs to have a scramble generator as well.  there's enough smaller things I can do.  user profiles are good enough for now.  I don't need a follow mechanism.  
+
+Ok so that means..to do is:
+
+-  add scramble generator, inspection time, sound notification on timer
+-  race rooms
+-  add to chat functionality
+-  go to user profile from search bar
+-  clean up user profile
+-  clean up navbar styling
