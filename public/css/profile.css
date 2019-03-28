@@ -1,0 +1,25 @@
+#table-wrapper {
+	text-align: center;
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
+#stats {
+	margin-bottom: 15px;
+	text-align: center;
+}
+
+.score-row {
+	display: none;
+}
+
+#load-more {
+	display: none;
+}
+
+#main-content {
+	margin-top: 40px;
+}
+
+
+

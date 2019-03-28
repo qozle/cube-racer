@@ -1,0 +1,102 @@
+
+<body>
+	<!-- this css /could/ dynamically inserted into the head and removed -->
+	<link rel="preload" href="css/home-page.css" as="style" onload="this.rel='stylesheet'">
+	<!--  N A V B A R  -->
+	<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">Cube Racer</a>
+		<button class="navbar-toggler btn btn-sm" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+   			<ul class="navbar-nav">
+      			<li class="nav-item active">
+					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a id='nav-stats' class="nav-link" href='#'>Stats</a>
+			  	</li>
+			  	<li class="nav-item">
+					<a class="nav-link" href="#">Ranking</a>
+			  	</li>
+				<li class="nav-item">
+					<a class="nav-link" id='nav-timer' href='#'>Timer</a>
+			  	</li>
+			  	<li class="nav-item">
+					<a class="nav-link logout" href="#">Logout</a>
+			  	</li>
+
+				<form class='form-inline' autocomplete="off">
+					<div class="autocomplete">
+						<input class='form-control' id="myInput" type="search" name="myCountry" placeholder="Country">
+					</div>
+					<button id='nav-search-button' class='btn btn-outline-success' type="submit">Find user</button>
+				</form>
+				
+    		</ul>
+		</div>
+	</nav>
+	<!--  could do some .then() / promisey kinda stuff here  -->
+	<link rel="preload" href="css/nav.css" as="style" onload="this.rel='stylesheet'">
+	<script>
+		$.getScript('libs/auto-complete.js');
+	</script>
+	<script>
+		$.getScript('js/nav.js');
+	</script>
+
+	<!--  M A I N  C O N T E N T  -->
+	<div class='container-fluid' id='main-container'>
+		<div class='row' id='main-content'>
+			
+			
+		</div>
+		
+		<button class='btn btn-secondary btn-sm btn-block' id='collapse-button' data-toggle='collapse' data-target='#chat-container' aria-expanded="true" aria-controls="collapse-button">Collapse Chat</button>
+		
+		<!-- chat container -->
+		<div id='chat-container' class='collapse'>
+			<!-- messages -->
+			<div>
+				<div class='col px-0'>
+					<ul id='messages'></ul>
+				</div>
+			</div>
+			<!--  chat input -->
+			<form class='form-row' id='chat-form'>
+				<div id='chat-input-col' class='form-group col-10'>
+					<input type='text' id='chat-input-field'>
+				</div>
+				<div id='chat-button-col' class='col-2'>
+					<button class='btn btn-primary' type='submit' id='chat-input-button'>Send</button>
+				</div>
+			</form>
+			<script>
+				//  this has to be looked at
+				$(window).click(function(e){
+					if (!$('nav').is(':focus') && !$('#myInput').is(':focus') && e.target != $('.autocomplete-items div')){
+						$('#navbarNav').collapse('hide');
+					}
+				});
+			</script>
+		</div>
+		<button class='btn btn-sm btn-secondary logout' id='logout-button'>Logout</button>
+		<script>
+			$.getScript('js/home-page.js');
+		</script>
+	</div>
+	
+			
+<script>
+	$.getScript("/socket.io/socket.io.js");
+	</script>
+</body>
+
+
+
+
+
+
+
+
+

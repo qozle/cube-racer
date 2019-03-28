@@ -30,3 +30,19 @@ What should the home page have on it?
 +  chat room (hideable, can leave)
 +  show your best time, best average
 +  link to start / join race room
+
+===============================================================================
+3.27.2019 0139
+
+to do:
+
+fix mysql calls.  just open one connection and close it at the very end.  this is fine.
+================================================================================
+
+2019.3.27 
+
+A ranking system might be unrealistic at this point, I'm thinking.  It's just because the solves aren't verified and there's really no way to verify them.  so what's to stop someone from just tapping quickly and getting an unrealistic time and then being on top of the site records?  I could eventually have verified solves with an uploaded video maybe?  It just doesn't seem like a viable idea.  
+
+The whole database idea in general I guess isn't so great?  I already made the profile page though, I may as well have it so you can search for users and choose to follow them.  That woul dbe a good demonstration of skill too.  
+
+So I think on the navbar and on the home page, I'll have a search field.  

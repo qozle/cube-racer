@@ -17,15 +17,14 @@ $(function(){
 				type: 'POST',
 				data: loginData,
 				success: function(result){
-					console.log(result);
 					var html = result.html;
 					var user = result.user;
-					$('body').empty();
-					$('body').append(html);
+					$('#main-content').remove();
+					$('#main-container').append(html);
 					localStorage.handle = user;
 				},
 				error: function(error){
-					$('body').append(error);
+					console.log(error)
 				}
 			});
 		}
@@ -74,11 +73,11 @@ $(function(){
 				type: 'POST',
 				data: signupData,
 				success: function(result){
-					$('body').empty();
-					$('body').append(result);
+					$('#main-content').remove();
+					$('#main-container').append(result);
 				},
 				error: function(error){
-					$('body').append(error);
+					console.log(error)
 				}
 			});
 		}

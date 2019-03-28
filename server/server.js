@@ -1,4 +1,3 @@
-//npm modules
 const express = require('express');
 const app = express();
 const fs = require('fs');
@@ -14,6 +13,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const mysql = require('mysql');
+const io = require('socket.io')(https);
 
 
 
@@ -22,9 +22,8 @@ const mysql = require('mysql');
 //  S E T U P  A N D  I N I T
 ////////////////////////////
 
-
-//  Config options for MySQLStore
-var options = {
+//  mysql connect info
+var connect_info = {
     host: 'localhost',
     port: 3306,
     user: 'cuber',
@@ -32,37 +31,10 @@ var options = {
     database: 'cuberacer'
 };
 
-
 //  Just pass this in later
-var sessionStore = new MySQLStore(options);
-
-
-//  function for opening a mysql connection
-function connectToDatabase(){
-	connection = mysql.createConnection({
-		host : 'localhost',
-		port: 3306,					
-		user : 'cuber',          
-		password : 'gperm',  
-		database : 'cuberacer'     
-	});
-	connection.connect(function(err){
-		if (err) {
-			console.log('error connecting: ' + err.stack);
-			return;
-		}
-		console.log('New MYSQL connection: ' + connection.threadId);
-	});
-	return connection;
-}
-
-
-//  function for closing mysql connection
-function closeConnectToDatabase(connection){
-	connection.end(function(err){
-		if (err) {console.log(err);}
-	});
-}
+var sessionStore = new MySQLStore(connect_info);
+//  mysql pool
+var pool  = mysql.createPool(connect_info);
 
 
 // config passport Local strategy
@@ -71,11 +43,10 @@ passport.use(new LocalStrategy(
 	 passwordField: 'password',
 	 passReqToCallback: true},
 	(req, email, password, done) => {
-		var connection = connectToDatabase();
-		connection.query('SELECT * FROM users WHERE email = ?', [email], 
+		pool.query('SELECT * FROM users WHERE email = ?', [email], 
 						function(error, results){
 			var userData = results[0];
-			if (error) {return done(error);}
+			if (error) throw error;
 			if (!userData){
 				return done(null, false, {message: 'no user found with that email'});
 			}
@@ -86,26 +57,21 @@ passport.use(new LocalStrategy(
 				return done(null, userData);
 			}
 		});
-		closeConnectToDatabase(connection);
 	}
 ));
 
 
 //  How passport will serialize the user data
 passport.serializeUser((user, done) => {
-	console.log('passport is serializing data')
 	done(null, user.id);
 });
 
 //  How passport will deserialize the user data
 passport.deserializeUser(function(id, done) {
-	console.log('passport is deserializing data')
-	var connection = connectToDatabase();
-	connection.query("select * from users where id = ?", [id], function(error, results){
+	pool.query("select * from users where id = ?", [id], function(error, results){
 		if (error){console.log(error);}
 		else {done(error, results[0]);}
 	});
-	closeConnectToDatabase(connection);
 });
 
 
@@ -127,44 +93,44 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+
 ////////////////////////////////////////////
 //  here, have some E X P R E S S  R O U T E S
 ////////////////////////////////////////////
+
 
 //  Root directory to serve content from
 const rootDir = {root: '/mnt/c/xampp/htdocs/projects/cube-racer'};
 
 app.get('/favicon.ico', (req, res) => {
-	res.sendFile('/favicon.ico', rootDir);
+	res.sendFile('/public/assets/imgs/favicon.ico', rootDir);
 });
 
 //  Serve player profile 'template'
 app.get('/users/:username', function(req, res){
-	res.sendFile('profile.html', rootDir);
+	res.sendFile('/views/profile.html', rootDir);
 });
 
 //  Serve profile information
 app.post('/getProfile', (req, res) => {
 	var body = req.body;
 	var respData = [];
-	//  Get the player's basic profile info
 	
-	var connection = connectToDatabase();
-	connection.query('SELECT * FROM users WHERE handle = ?', [body.profile.replace('/users/','')], function(error, results){
-		if (error){console.log(error)}
+	//  Get the player's basic profile info
+	pool.query('SELECT * FROM users WHERE handle = ?', [body.profile.replace('/users/','')], function(error, results){
+		if (error)throw error;
 		if (!results[0]){
 			res.send("There's no user handle for " + body.profile)
 		} else if (results[0]){
 			respData.push(results[0]);
-			connection.query(`SELECT * FROM ${body.profile.replace('/users/','')};`, 
+			pool.query(`SELECT * FROM ${body.profile.replace('/users/','')};`, 
 			function(error, results){
 				if (error){console.log(error)}
 				respData.push(results);
 				res.send(respData);
-				
 			});
 		}
-		closeConnectToDatabase(connection);
+		
 	});
 	
 });
@@ -172,49 +138,54 @@ app.post('/getProfile', (req, res) => {
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {
-	if (req.isAuthenticated()){
-		res.sendFile('/home-page.html', rootDir);
-	} else {
+
 	
-		console.log('try logging in buddy');
-		res.sendFile('/index.html', rootDir);
+	if (req.isAuthenticated()){
+		var html = fs.readFileSync('../views/head-template.html', 'utf8');
+		html += fs.readFileSync('../views/home-page.html','utf8');
+		res.send(html)
+	} else {
+		var html = fs.readFileSync('../views/head-template.html', 'utf8');
+		html += fs.readFileSync('../views/index.html','utf8');
+		res.send(html)
 	}
+			
+		
+	
 });
 
 app.get('/home-page', (req, res) =>{
 	if (req.isAuthenticated()){
-		res.sendFile('/home-page.html', rootDir);
+		res.sendFile('/views/home-page.html', rootDir);
 	} else {
-		res.send('sorry, no creds, you dont belong here');
+		res.redirect('/');
 	}
 });
 
-//  Create the signup route
-app.get('/signup', (req, res) => {
-	res.sendFile(__dirname + '/signup.html');
+app.get('/timer', (req, res)=>{
+	res.sendFile('/views/timer.html', rootDir);
 });
 
 //  Signup POST route
 app.post('/signup', (req, res, next) => {
 	var body = req.body;
 	//  Plug signup data into the database
-	var connection = connectToDatabase();
-	connection.query('SELECT * FROM users WHERE email = ?', [body.email], 
+	
+	pool.query('SELECT * FROM users WHERE email = ?', [body.email], 
 					  function(error, results, fields){
 		if (error){console.log(error)}
 		else {
 			if (results[0]){res.send('email already in use')}
 			else {
-				var connection = connectToDatabase();
 				//  Insert user info into database
-				connection.query('INSERT INTO users (id, email, password, firstname, lastname, bmonth, bday, byear, handle) values (?,?,?,?,?,?,?,?,?)',
+				pool.query('INSERT INTO users (id, email, password, firstname, lastname, bmonth, bday, byear, handle) values (?,?,?,?,?,?,?,?,?)',
 								[req.sessionID, body.email, body.password, body.firstname, body.lastname, body.bmonth, body.bday, body.byear, body.handle], 
 								function(error, fields, results){
 					if (error){console.log(error)}
 				});
 				
 				//  create a new table for the users scores
-				connection.query(`CREATE TABLE ${body.handle} (cube varchar(25), min int(3), sec int(3), ms int(4), date DATETIME);`, 
+				pool.query(`CREATE TABLE ${body.handle} (cube varchar(25), min int(3), sec int(3), ms int(4), date DATETIME);`, 
 								function(error, results){
 					if (error) {console.log(error)}
 					else {
@@ -224,12 +195,12 @@ app.post('/signup', (req, res, next) => {
 			}
 		}
 	});
-	closeConnectToDatabase(connection);
+	
 });
 
 //  login GET route
 app.get('/login', (req, res) => {
-	res.sendFile(__dirname + '/login.html');
+	res.sendFile(__dirname + '/views/login.html');
 })
 
 //  login POST route
@@ -241,7 +212,7 @@ app.post('/login', (req, res, next) => {
 	  req.login(user, (err) => {
 		  if (err){return next(err)};
 		  var respData = {
-			  html: fs.readFileSync('../home-page.html', 'utf8'),
+			  html: fs.readFileSync('../views/home-page.html', 'utf8'),
 			  user: req.user.handle
 		  }
 		  return res.send(respData);
@@ -251,9 +222,16 @@ app.post('/login', (req, res, next) => {
 
 //  logout route
 app.get('/logout', (req, res) => {
+	
 	req.session.destroy(function(){
-		
-		res.sendFile('/index.html', rootDir);
+		res.sendFile('/views/index.html', rootDir)
+	});
+});
+
+//  serve a list of all user names
+app.get('/getUserList', (req, res)=>{
+	pool.query('SELECT handle FROM users;', (index, results)=> {
+		res.send(results);
 	});
 });
 
@@ -263,11 +241,11 @@ app.post('/newTime', (req, res) => {
 		console.log("ok you're authenticated");
 		var user = req.user;
 		console.log('inside /newtime')
-		var connection = connectToDatabase();
-		connection.query(`INSERT INTO ${user.handle} (cube, min, sec, ms, date) VALUES ('3x3', '${req.body.mins}', '${req.body.secs}', '${req.body.ms}', NOW())`), function(error, results){
+		
+		pool.query(`INSERT INTO ${user.handle} (cube, min, sec, ms, date) VALUES ('3x3', '${req.body.mins}', '${req.body.secs}', '${req.body.ms}', NOW())`), function(error, results){
 			if (error) {console.log(error)}
 		}
-		closeConnectToDatabase(connection);
+		res.send('data inserted!');
 	} else {
 		console.log("looks like no auth buddy");
 	}
@@ -279,6 +257,32 @@ https.listen(1337, () => {
   console.log('Listening on localhost:1337')
 })
 
+
+//  S O C K E T . I O  S T U F F 
+io.on('connection', (socket) =>{
+	console.log('someone just signed in yao, at ' + new Date());
+	
+	socket.on('disconnect', (socket)=>{
+		console.log('someone just left yao, at ' +  new Date())
+	});
+	
+	socket.on('newMessage', (message)=>{
+		io.emit('newMessage', message);
+	});
+	
+});
+
+
+//  Gracefully shut down server- what a concept!
+//  This allows me use one connection / pool for 
+//  mysql
+process.on( 'SIGINT', function() {
+  	console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+	
+	pool.end();
+	
+  	process.exit();
+})
 
 
 

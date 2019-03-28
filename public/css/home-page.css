@@ -2,53 +2,55 @@ p {
 	text-align: center;
 }
 
-#timer-text {
-	height: auto;
-	width: -webkit-fit-content;
-	width: -moz-fit-content;
-	width: fit-content;
-	min-width: -webkit-min-content;
-	min-width: -moz-min-content;
-	min-width: min-content;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+
+
+#chat-container {
+	margin-top: 0;
+	padding: 0;
 }
 
-#timer-text span {
-	/* what the heck is define? */
-	width: {define width}
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	font-weight: bold;
-	font-size: 6.3em;
-	margin: auto;
+#messages {
+	height: 200px;
+	max-height: 200px;
+	overflow-y: scroll;
+	width: 100%;
+	padding-left: 0;
+	margin-bottom: 0;
+	background-color: beige;
 }
 
-#times-heading {
-	text-align: center;
-	background-image: linear-gradient(blue, beige);
+#chat-input-col {
+	padding-right: 0;
 }
 
-#times-list {
-	text-align: center;
+#chat-button-col {
+	padding-left: 0;
 }
 
-#stats {
-	text-align: center;
+#chat-input-field {
+	width: 100%;
+	padding: 0;
+	margin: 0;
 }
 
-#stats-heading {
-	text-align: center;
-	background-image: linear-gradient(blue, beige);
+#chat-input-button {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	padding-top: 1;
+	padding-bottom: 1;
+	border-radius: 0 !important;
+	
 }
 
 #logout-button {
+	margin-top: 5px;
+	margin-bottom: 5px;
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
 }
+
+
+
 
