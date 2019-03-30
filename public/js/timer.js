@@ -1,7 +1,7 @@
-$(function(){
-	//  Collapse the chat container, because you
-	//  came here to solve, obv.
-	$('#chat-container').toggle('collapse');
+$(function(){	
+	
+	//  Init with a first scramble
+	scrambler()
 	
 	//////////////////////////////////////////
 	//  S T O P  W A T C H 
@@ -48,6 +48,8 @@ $(function(){
 			}
 		});
 		
+		scrambler();
+		
 		//  add time to the list of times
 		$('#times-list').prepend('<li class="list-group-item list-group-item-action">' + ('0' + lastTime.getMinutes()).slice(-2) + ':' + ('0' + lastTime.getSeconds()).slice(-2) + '.' + ('00' + lastTime.getMilliseconds()).slice(-3) + '</li>');
 		times.push(lastTime);
@@ -93,29 +95,88 @@ $(function(){
 	///////////////////////////////////////////
 	//// S R C M A B L E R
 	//////////////////////////////////////////
-	const possibleTurns = ["U","D","L","R","F","B","U'","D'","L'","R'","F'","B'"];
 	
-	//  Don't mind me, just building my own random choice function...
-	function choose(array){
-		var index = Math.floor(Math.random() * array.length);
-		return array[index];
-	}
 	
-	var scramble = {set0: [], set1: [], set2: [], set3: [], set4:[]};
-	
-	for (var i = 0; i <=4; i++){
-		for (var j = 0; j <=3; j++){
-			scramble['set' + i].push(choose(possibleTurns));
+	function scrambler(){
+		
+		const faces = {
+			U : {'allowed': true, 'allows': ['L', 'R', 'F', 'B']},
+			D : {'allowed': true, 'allows': ['L', 'R', 'F', 'B']},
+			L : {'allowed': true, 'allows': ['U', 'D', 'F', 'B']},
+			R : {'allowed': true, 'allows': ['U', 'D', 'F', 'B']},
+			F : {'allowed': true, 'allows': ['U', 'D', 'L', 'R']},
+			B : {'allowed': true, 'allows': ['U', 'D', 'L', 'R']}
+		};
+
+		const faces_index = ['U', 'D', 'R', 'L', 'F', 'B'];
+
+		//  Don't mind me, just building my own random choice function...
+		function choose(array){
+			var index = Math.floor(Math.random() * array.length);
+			return array[index];
 		}
+
+		//  Make 25 random moves  
+		var i, f, face, direction, scramble = [];
+		for (i = 0; i <= 24; i++ ) {
+			//  Pick a face as long as it's allowed
+			do {
+				face = choose(faces_index);
+				console.log(faces[face]['allowed'])
+			} while (!faces[face]['allowed'])
+			//  Make sure we don't pick the same face twice
+			faces[face]['allowed'] = false;
+			//  Allow the faces on the other 2 axises
+			for (f = 0;f < faces[face]['allows'].length; f++) (
+				faces[faces[face]['allows'][f]]['allowed'] = true
+			);
+			//  Pick a random direction
+			switch(Math.floor(Math.random() * 3)) {
+				case 0 : direction = ""; break;
+				case 1 : direction = "2"; break;
+				case 2 : direction = "'"; break;
+			};
+
+
+			scramble.push(face + direction)
+
+		}
+
+		console.log(scramble)
+
+		var moves = [ 
+			scramble.splice(0,5),
+			scramble.splice(0,5),
+			scramble.splice(0,5),
+			scramble.splice(0,5),
+			scramble.splice(0,5)
+		]
+
+		var moves2 = {}
+
+
+		moves.forEach((setList, mIndex)=>{
+			setList.forEach((move, sIndex)=>{
+				if (!moves2[mIndex]){ moves2[mIndex] = '';}
+				moves2[mIndex] += move + ' ';
+			});
+			moves2[mIndex] = moves2[mIndex].slice(0, moves2[mIndex].length - 1);
+		});
+
+		console.log(moves2);
+
+
+
+		//  Works, just needs to be reformatted to display pretty-like
+		$('#scramble').text(
+			"[" + moves2[0] + "] - " +
+			"[" + moves2[1] + "] - " +
+			"[" + moves2[2] + "] - " +
+			"[" + moves2[3] + "] - " +
+			"[" + moves2[4] + "] "
+		);
+		
 	}
-	//  Works, just needs to be reformatted to display pretty-like
-	$('#scramble').text(
-		scramble.set0 + '-' + 
-		scramble.set1 + '-' +
-		scramble.set2 + '-' +
-		scramble.set3 + '-' +
-		scramble.set4
-	);
 	
 	
 	

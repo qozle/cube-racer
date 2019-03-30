@@ -138,8 +138,6 @@ app.post('/getProfile', (req, res) => {
 
 // create the homepage route at '/'
 app.get('/', (req, res) => {
-
-	
 	if (req.isAuthenticated()){
 		var html = fs.readFileSync('../views/head-template.html', 'utf8');
 		html += fs.readFileSync('../views/home-page.html','utf8');
@@ -149,21 +147,24 @@ app.get('/', (req, res) => {
 		html += fs.readFileSync('../views/index.html','utf8');
 		res.send(html)
 	}
-			
-		
-	
 });
 
-app.get('/home-page', (req, res) =>{
-	if (req.isAuthenticated()){
-		res.sendFile('/views/home-page.html', rootDir);
-	} else {
-		res.redirect('/');
-	}
-});
+//app.get('/homePage', (req, res) =>{
+//	if (req.isAuthenticated()){
+//		res.sendFile('/views/home-page.html', rootDir);
+//	} else {
+//		res.redirect('/');
+//	}
+//});
 
 app.get('/timer', (req, res)=>{
 	res.sendFile('/views/timer.html', rootDir);
+});
+
+app.get('/race', (req, res)=>{
+	if (req.isAuthenticated()){
+		res.sendFile('/views/race.html', rootDir);
+	}
 });
 
 //  Signup POST route

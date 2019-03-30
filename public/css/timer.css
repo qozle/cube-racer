@@ -28,6 +28,16 @@ html {
 	margin: auto;
 }
 
+
+
+#scramble {
+	text-align: center;
+	width: auto;
+	font-size: 1.2em;
+	font-weight: bold;
+	
+}
+
 #times-col {
 	overflow-y: scroll;
 	max-height: 221px;

@@ -1,0 +1,39 @@
+
+#chat-container {
+	margin-top: 0;
+	padding: 0;
+}
+
+#messages {
+	height: 200px;
+	max-height: 200px;
+	overflow-y: scroll;
+	width: 100%;
+	padding-left: 0;
+	margin-bottom: 0;
+	background-color: beige;
+}
+
+#chat-input-col {
+	padding-right: 0;
+}
+
+#chat-button-col {
+	padding-left: 0;
+}
+
+#chat-input-field {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#chat-input-button {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	padding-top: 1;
+	padding-bottom: 1;
+	border-radius: 0 !important;
+	
+}
