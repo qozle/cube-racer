@@ -1,13 +1,15 @@
 $(function(){
-	var userProfile = localStorage.getItem('handle');
+	var url = new URL(window.location.href);
+	var userProfile = url.searchParams.get('user');
 	//  Get user profile information
 	$.ajax({
-		url: '/getProfile',
+		url: '/profileData',
 		type: 'POST',
 		data: {profile: userProfile},
 		success: function(data){
 		//  If there's actually data, this will populate
 		//  the page with it.
+			url.searchParams.delete('user');
 			var profileData = data[0];
 			var recentTimes = data[1];
 			

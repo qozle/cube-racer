@@ -1,6 +1,15 @@
 $(function(){
-	
+	var userToGet;
 	var names = [];
+	
+	//  Collapse the navbar if the mouse clicks off of it,
+	//  but only if certain nav elements aren't being selected
+	$(window).click(function(e){
+			if (!$(e.target).is('nav') &&  !$(e.target).is('#myInput') && !$(e.target).is('.acLink')){
+				$('#navbarNav').collapse('hide');
+			}
+		});
+	
 	
 	$.ajax({
 		url: '/getUserList',
@@ -61,8 +70,9 @@ $(function(){
 	//  profile view
 	$('#nav-profile').click(function(e){
 		e.preventDefault();
+		window.history.replaceState(null, null, `?user=${window.localStorage.getItem('handle')}`)
 		$.ajax({
-			url: `/users/${localStorage.getItem('handle')}`,
+			url: '/getProfile',
 			type: 'GET',
 			success: function(data){
 				//  this looks wonky when executed, should use .then / promisey stuff???
@@ -74,6 +84,26 @@ $(function(){
 				console.log(error.message);
 			}
 		});
+	});
+	
+	
+	//  
+	$('#nav-search-button').click((e)=>{
+		e.preventDefault();
+		if ($('#myInput').val() != ''){
+			window.history.replaceState(null, null,`?user=${$('#myInput').val()}`);
+			$.ajax({
+				url: '/getProfile',
+				type: 'GET',
+				success: (data) =>{
+					$('#main-content').remove();
+					$('#main-container').append(data);
+					$('#myInput').val('');
+
+					console.log(data)
+				}
+			});
+		}
 	});
 	
 	$('.logout').click(function(e){

@@ -107,16 +107,17 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 //  Serve player profile 'template'
-app.get('/users/:username', function(req, res){
+app.get('/getProfile', function(req, res){
 	res.sendFile('/views/profile.html', rootDir);
 });
 
 //  Serve profile information
-app.post('/getProfile', (req, res) => {
+app.post('/profileData', (req, res) => {
+	
 	var body = req.body;
 	var respData = [];
 	
-	//  Get the player's basic profile info
+//	  Get the player's basic profile info
 	pool.query('SELECT * FROM users WHERE handle = ?', [body.profile.replace('/users/','')], function(error, results){
 		if (error)throw error;
 		if (!results[0]){
