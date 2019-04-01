@@ -1,0 +1,64 @@
+#main-content {
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#timer-text {
+	height: auto;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	min-width: -webkit-min-content;
+	min-width: -moz-min-content;
+	min-width: min-content;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#timer-text span {
+	/* what the heck is define? */
+	width: {define width}
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font-weight: bold;
+	font-size: 6.3em;
+	margin: auto;
+}
+
+#scramble {
+	text-align: center;
+	width: auto;
+	font-size: 1.2em;
+	font-weight: bold;
+	
+}
+
+#times-col {
+	overflow-y: scroll;
+	max-height: 221px;
+}
+
+#times-heading {
+	text-align: center;
+	background-image: linear-gradient(blue, beige);
+	margin-bottom: 0;
+}
+
+#times-list {
+	text-align: center;
+	
+}
+
+#stats-heading {
+	text-align: center;
+	background-image: linear-gradient(blue, beige);
+	margin-bottom: 0;
+}
+
+#stats {
+	text-align: center;
+}

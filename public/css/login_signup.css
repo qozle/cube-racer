@@ -1,0 +1,44 @@
+body {
+	background-color: beige;
+}
+
+#main-container {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#main-content {
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+#splash-text {
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 50px;
+	background-image: linear-gradient(blue, beige);
+}
+
+#pswd-text {
+	list-style: none;
+}
+
+#login {
+	margin-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px silver solid;
+}
+
+#signup {
+	margin-top: 15px;
+	padding-bottom: 15px;
+}
+
+#signup-button {
+	margin-top: 10px;
+}
+
+#login-button {
+	margin-top: 10px;
+	
+}

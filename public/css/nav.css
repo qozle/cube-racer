@@ -1,0 +1,93 @@
+/*  
+These navbar styles have to be moved to a 
+media query so that they're only active before 
+the navbar-expand break point 
+*/
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:0px !important; 
+	padding-bottom:0px !important;
+}
+
+.navbar {
+	min-height:30px !important;
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
+}
+
+.navbar-nav {
+	margin-left: auto;
+}
+
+.nav-link {
+	vertical-align: middle !important;
+}
+
+.navbar-toggle {
+     padding: 0 0;
+     margin-top: 7px;
+     margin-bottom: 0;
+}
+
+.navbar-brand {
+	vertical-align: middle !important;
+}
+
+#nav-search-button {
+	margin-top: 5px;
+}
+
+.navbar-toggler {
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+.navbar-toggler-icon {
+	height: 20px !important;
+	width: 20px !impotant;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  	position: relative;
+	margin-right: 5px;
+	margin-top: 5px;
+  	display: inline-block;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9; 
+}
+
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+#logout-button {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}

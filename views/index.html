@@ -1,0 +1,91 @@
+
+	
+
+
+
+
+	
+
+<!--  L O G I N  A N D  S I G N  U P  -->
+
+
+<div class='container-fluid' id='main-container'>
+
+
+	<div id='main-content'>
+		
+		
+		<h1 id='splash-text' class='display1'>C U B E &nbsp;R A C E R</h1>
+		
+		<p><a id='login_signupLink' href=''>Login or create a profile to record your times, chat, and race!</a></p>
+		
+		<div class='row'>
+		<!--  This should be inserted into the head with js? -->
+			<link rel="preload" href="css/timer.css" as="style" onload="this.rel='stylesheet'">
+		<!--  S T O P W A T C H  -->
+		<div class='col-12'>
+			<div id='timer-text'>
+				<span>00:</span><span>00.</span><span>000</span>
+			</div>
+			<span id='scramble' class='d-block mx-auto'></span>
+			<p>Press spacebar to start / stop timer</p>
+		</div>
+		<!--  R E C O R D E D  T I M E S  -->
+		<div class='col-6' id='times-col'>
+			<h5 id='times-heading'>
+				T I M E S 
+				</h5>
+			<ol class='list-group' reversed id='times-list'></ol>
+		</div>
+		<!--  S T A T S  -->
+		<div class='col-6' id='stats-col'>
+			<table class='table table-striped table-bordered table-hover table-sm' id='stats'>
+				<h5 id='stats-heading'>
+				S T A T S
+				</h5>
+				<tr>
+					<th scope='col'>Best</th>
+					<th scope='col'>Average</th>
+				</tr>
+				<tr>
+					<td id='best'>--:--.---</td>
+					<td id='average'>--:--.---</td>
+				</tr>
+				<tr>
+					<th scope='col'>Avg. of 5</th>
+					<th scope='col'>Avg. of 10</th>
+				</tr>
+				<tr>
+					<td id='average-of-5'>--:--.---</td>
+					<td id='average-of-10'>--:--.---</td>
+				</tr>
+				<tr>
+					<th scope='col'>3 of 5</th>
+					<th scope='col'>8 of 10</th>
+				</tr>
+				<tr>
+					<td id='3-of-5'>--:--.---</td>
+					<td id='8-of-10'>--:--.---</td>
+				</tr>
+			</table>
+				</div>
+			<script>
+				//  This should almost definitely be promisey-stuff to ensure
+				//  that the scripts get loaded in the right order. 
+				$.getScript('/js/index.js');
+				$.getScript('/libs/time-stats.js');
+				$.getScript('/js/stop-watch.js');
+				$.getScript('/js/timer.js');
+			</script>
+			<link rel="preload" href="css/style.css" as="style" onload="this.rel='stylesheet'">
+		
+		
+		</div>
+		
+		
+		
+		
+
+	</div>
+</div>
+
