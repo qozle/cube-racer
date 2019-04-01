@@ -4,12 +4,16 @@
 }
 
 .active {
-	display: block;
+	display: inline-block;
 	background-color: rgba(200,200,200);
 }
 
 .col, col-10, col-12, col-2, col-6 {
 	padding: 0!important;
+}
+
+.row {
+	margin: 0!important;
 }
 
 .container-fluid {
@@ -20,67 +24,6 @@ p {
 	text-align: center;
 }
 
-/*  T I M E R  S T Y L E S  */
-
-#timer-text {
-	height: auto;
-	width: -webkit-fit-content;
-	width: -moz-fit-content;
-	width: fit-content;
-	min-width: -webkit-min-content;
-	min-width: -moz-min-content;
-	min-width: min-content;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#timer-text span {
-	/* what the heck is define? */
-	width: {define width}
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	font-weight: bold;
-	font-size: 6.3em;
-	margin: auto;
-}
-
-#scramble {
-	text-align: center;
-	width: auto;
-	font-size: 1.2em;
-	font-weight: bold;
-	
-}
-
-#times-col {
-	overflow-y: scroll;
-	max-height: 221px;
-}
-
-#times-heading {
-	text-align: center;
-	background-image: linear-gradient(blue, beige);
-	margin-bottom: 0;
-}
-
-#times-list {
-	text-align: center;
-	
-}
-
-#stats-heading {
-	text-align: center;
-	background-image: linear-gradient(blue, beige);
-	margin-bottom: 0;
-}
-
-#stats {
-	text-align: center;
-}
 
 /*  C H A T  S T Y L E S  */
 #chat-container {
@@ -106,12 +49,14 @@ p {
 	background-color: rgba(210,210,210)
 }
 
-/*
 .tab-button:focus {
 	outline: none;
 	background-color: rgba(240,240,240);
 }
-*/
+
+#chatbox-col {
+	padding: 0;
+}
 
 .messageBox {
 	height: 400px;
@@ -123,28 +68,54 @@ p {
 	background-color: rgb(245, 245, 220);
 }
 
+#rooms-col {
+	padding: 0;
+}
+
+#rooms-list {
+	height: 400px;
+	max-height: 400px;
+	width: 100%;
+	padding: 0;
+	background-color: mintcream;
+}
+
+#rooms-header {
+	text-align: center;
+	list-style: none;
+	border-bottom: 1px solid black;
+	height: 52px;
+	margin-bottom: 0;
+}
+
+.rooms-list-item {
+	list-style: none;
+}
+
 #chat-form {
 	margin-bottom: 0;
 }
 
 #chat-input-col {
-	padding-right: 0;
+	padding: 0;
 	margin-bottom: 0;
 }
 
 #chat-button-col {
 	margin-right: 0;
-	padding-left: 0;
+	padding: 0;
 }
 
 #chat-input-field {
 	width: 100%;
 	padding: 0;
 	margin: 0;
+	border-radius: 0;
 }
 
 #chat-input-button {
 	width: 100%;
+	height: 36px;
 	padding: 0;
 	margin: 0;
 	padding-top: 1;

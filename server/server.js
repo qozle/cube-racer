@@ -274,9 +274,11 @@ io.on('connection', (socket) =>{
 		console.log('someone just left yao, at ' +  new Date())
 	});
 	
+	console.log(socket);
+	
 	//  Send the current rooms
-	socket.on('get rooms', ()=>{
-		io.emit('get rooms', {rooms: io.sockets.adapter.rooms});
+	socket.on('update rooms', ()=>{
+		io.emit('update rooms', {rooms: io.sockets.adapter.rooms});
 	});
 	
 	//  New Message

@@ -39,6 +39,8 @@
 			$.getScript('js/nav.js');
 		</script>
 	</nav>
+
+	
 	
 
 	<!--  M A I N  C O N T E N T  -->
@@ -49,7 +51,7 @@
 		<!-- C H A T  C O N T A I N E R -->
 	
 		
-			<div class='row no-gutters'>
+			<div class='row'>
 				<div class='col' id='chat-container'>
 
 				<link rel="preload" href="css/home-page.css" as="style" onload="this.rel='stylesheet'">
@@ -57,8 +59,8 @@
 
 				
 					<!-- messages -->
-					<div class='row no-gutters'>
-						<div class='col'>
+					<div class='row'>
+						<div class='col-10' id='chatbox-col'>
 							<div id='tab-container'>
 								<button class='tab-button active-tab' id='tabGeneral'>General</button>
 							</div>
@@ -66,37 +68,34 @@
 								<ul class='messageBox active' id='general'></ul>
 							</div>
 						</div>
+						
+						<div class='col-2' id='rooms-col'>
+							<h4 id='rooms-header'>public rooms</h4>
+							<ul id='rooms-list'>
+								
+							</ul>
+						</div>
 					</div>
 					<!--  chat input -->
-					<div class='row no-gutters'>
+					<div class='row'>
 						<div class='col'>
-					<form>
-						<div class='form-group row no-gutters' id='chat-form'>
-						<div id='chat-input-col' class='col-10'>
-							<input class='form-control' type='text' id='chat-input-field'>
+							<form class='form form-inline' id='chat-form'>
+
+								<div id='chat-input-col' class='col-10'>
+									<input class='form-control' type='text' id='chat-input-field'>
+								</div>
+								<div id='chat-button-col' class='col-2'>
+									<button class='btn btn-primary' type='submit' id='chat-input-button'>Send</button>
+								</div>
+							</form>
 						</div>
-						<div id='chat-button-col' class='col-2'>
-							<button class='btn btn-primary' type='submit' id='chat-input-button'>Send</button>
-						</div>
-						</div>
-					</form>
-						</div>
-				</div>
-				
 					</div>
-				
-
-
-
-
-
-
-
+				</div>
 				<script>$.getScript('js/home-page.js');</script>
 			</div>
 
-
-			<div class='row no-gutters'>
+			<!--  Room buttons  -->
+			<div class='row'>
 				<div class='col-12'>
 
 					<!--  make room button  -->
@@ -110,7 +109,7 @@
 				</div>
 			</div>
 
-			<div class='row no-gutters'>
+			<div class='row'>
 				<div class='col-12'>
 					
 					<div class='collapse' id='make-room-div'>
@@ -128,14 +127,8 @@
 					</div>
 				</div>
 			</div>
-
-
-	
-
-
-
 		<script>
-		$.getScript("/socket.io/socket.io.js");
+		$.getScript("https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js");
 		</script>
 	</div>
 </body>

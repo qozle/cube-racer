@@ -9,14 +9,20 @@ $(function(){
 //  C H A T  S T U F F !
 	
 	//  Get a list of all the current (eventually public) rooms
-	var rooms = []
-	socket.emit('get rooms');
-	socket.on('get rooms', (data)=>{
+	socket.emit('update rooms');
+	
+	socket.on('update rooms', (data)=>{
+		var rooms = [];
 		for (room in data.rooms){
-			console.log(room)
 			rooms.push(room)
 		}
 		rooms.splice(0,1);
+		console.log(rooms)
+		$('#rooms-list').empty();
+		rooms.forEach((room, index)=>{
+			$('#rooms-list').append($('<li>').addClass('rooms-list-item').attr('id', 'room' + room).text(room))
+			
+		});
 	});
 	
 	
@@ -31,7 +37,7 @@ $(function(){
 		});
 		
 		$('#chat-input-field').val('');
-		return false;
+		
 	});
 	
 	//  Init with general, so make sure it's auto scrolling 
@@ -76,6 +82,7 @@ $(function(){
 		});
 		intervals = []
 		intervals.push(setInterval(scrollWatcher, 100, $('.messageBox.active')));
+		$('#rooms-list').append($('<li>').addClass('rooms-list-item').attr('id', 'room' + $('#make-room-name').val()).text($('#make-room-name').val()));
 		
 		//  How bout this beauty, yikes
 		$(`#tab${$('#make-room-name').val()}`).click({el: $(`#${$('#make-room-name').val()}`)}, (e)=>{
@@ -86,8 +93,9 @@ $(function(){
 			$(e.target).addClass('active-tab');
 		});
 		socket.emit('make new room', {handle: handle, roomName: $('#make-room-name').val()});
+		socket.emit('update rooms');
 		$('#make-room-name').val('');
-		$('#make-room-div').toggle('collapse');
+		$('#make-room-div').removeClass('show');
 	});
 	
 	
@@ -112,8 +120,9 @@ $(function(){
 			$(e.target).addClass('active-tab');
 		});
 		socket.emit('join new room', {handle: handle, roomName: $('#join-room-name').val()});
+		socket.emit('update rooms');
 		$('#join-room-name').val('');
-		$('#join-room-div').toggle('collapse');		
+		$('#join-room-div').removeClass('show');		
 	});
 	
 
@@ -131,6 +140,7 @@ $(function(){
 			});
 		intervals = []
 		intervals.push(setInterval(scrollWatcher, 100, $('.messageBox.active')));
+		socket.emit('update rooms');
 		
 	});
 	
