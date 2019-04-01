@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <body>
 	
+	
+	
 	<!--  N A V B A R  -->
 	<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
 		<a class="navbar-brand" href="/">Cube Racer</a>
@@ -13,9 +15,6 @@
 					<a id='nav-timer' class="nav-link" href='#'>Timer</a>
 			  	</li>
 			  	<li class="nav-item">
-					<a id='nav-race' class="nav-link" href="#">Race!</a>
-			  	</li>
-				<li class="nav-item">
 					<a id='nav-profile' class="nav-link" href='#'>Your Profile</a>
 			  	</li>
 			  	<li class="nav-item">
@@ -40,31 +39,105 @@
 			$.getScript('js/nav.js');
 		</script>
 	</nav>
+	
 
 	<!--  M A I N  C O N T E N T  -->
 	<div class='container-fluid' id='main-container'>
-		<div class='row' id='main-content'>
-			
-			
-			<!-- this css /could/ dynamically inserted into the head and removed -->
-			<link rel="preload" href="css/home-page.css" as="style" onload="this.rel='stylesheet'">
-			<script>$.getScript('js/home-page.js');</script>
-		</div>
-		
-		
-		
 	
 		
 		
+		<!-- C H A T  C O N T A I N E R -->
+	
+		
+			<div class='row no-gutters'>
+				<div class='col' id='chat-container'>
+
+				<link rel="preload" href="css/home-page.css" as="style" onload="this.rel='stylesheet'">
+
+
+				
+					<!-- messages -->
+					<div class='row no-gutters'>
+						<div class='col'>
+							<div id='tab-container'>
+								<button class='tab-button active-tab' id='tabGeneral'>General</button>
+							</div>
+							<div id='messages-container'>
+								<ul class='messageBox active' id='general'></ul>
+							</div>
+						</div>
+					</div>
+					<!--  chat input -->
+					<div class='row no-gutters'>
+						<div class='col'>
+					<form>
+						<div class='form-group row no-gutters' id='chat-form'>
+						<div id='chat-input-col' class='col-10'>
+							<input class='form-control' type='text' id='chat-input-field'>
+						</div>
+						<div id='chat-button-col' class='col-2'>
+							<button class='btn btn-primary' type='submit' id='chat-input-button'>Send</button>
+						</div>
+						</div>
+					</form>
+						</div>
+				</div>
+				
+					</div>
+				
+
+
+
+
+
+
+
+				<script>$.getScript('js/home-page.js');</script>
+			</div>
+
+
+			<div class='row no-gutters'>
+				<div class='col-12'>
+
+					<!--  make room button  -->
+					<button id='make-room-clps-btn' data-toggle='collapse' data-target='#make-room-div'>Make Room</button>
+
+					<!--  join room button  -->
+					<button id='join-room-clp-btn' data-toggle='collapse' data-target='#join-room-div'>Join Room</button>
+					
+					<button id='leave-room-btn' data-toggle='collapse' data-target='#leave-room-div'>Leave Room</button>
+
+				</div>
+			</div>
+
+			<div class='row no-gutters'>
+				<div class='col-12'>
+					
+					<div class='collapse' id='make-room-div'>
+						<form>
+							<input type='text' name='make-room-name' id='make-room-name' placeHolder='Room name'>
+							<button class='btn btn-sm' id='make-room-btn'>Make room</button>
+						</form>
+					</div>
+						
+					<div class='collapse' id='join-room-div'>
+						<form>
+							<input type='text' name='join-room-name' id='join-room-name' placeHolder='Room name'>
+							<button class='btn btn-sm' id='join-room-btn'>Join room</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+
+	
+
+
+
+		<script>
+		$.getScript("/socket.io/socket.io.js");
+		</script>
 	</div>
-	<script>
-		
-	</script>
-	
-			
-	<script>
-	$.getScript("/socket.io/socket.io.js");
-	</script>
 </body>
 
 

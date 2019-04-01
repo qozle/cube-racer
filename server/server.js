@@ -94,9 +94,12 @@ app.use(passport.session());
 
 
 
-////////////////////////////////////////////
-//  here, have some E X P R E S S  R O U T E S
-////////////////////////////////////////////
+
+//////////////////////
+//  here, have some 
+/////////////////////////////////
+//  E X P R E S S  R O U T E S 
+/////////////////////////////////
 
 
 //  Root directory to serve content from
@@ -201,8 +204,8 @@ app.post('/signup', (req, res, next) => {
 });
 
 //  login GET route
-app.get('/login', (req, res) => {
-	res.sendFile(__dirname + '/views/login.html');
+app.get('/login-signup', (req, res) => {
+	res.sendFile('/views/login_signup.html', rootDir);
 })
 
 //  login POST route
@@ -262,17 +265,51 @@ https.listen(1337, () => {
 
 //  S O C K E T . I O  S T U F F 
 io.on('connection', (socket) =>{
+	console.log(io.sockets.adapter.rooms)
 	console.log('someone just signed in yao, at ' + new Date());
+	socket.join('general');
 	
+	//  Disconnect
 	socket.on('disconnect', (socket)=>{
 		console.log('someone just left yao, at ' +  new Date())
 	});
 	
-	socket.on('newMessage', (message)=>{
-		io.emit('newMessage', message);
+	//  Send the current rooms
+	socket.on('get rooms', ()=>{
+		io.emit('get rooms', {rooms: io.sockets.adapter.rooms});
+	});
+	
+	//  New Message
+	socket.on('newMessage', (msgData)=>{
+		io.to(msgData.room).emit('newMessage', msgData);
+	});
+	
+	//  Make new room
+	socket.on('make new room', (data)=>{
+		socket.join(data.roomName);
+		io.to(data.roomName).emit('newMessage', {handle: 'server', msg: "Welcome to " + data.roomName, room: data.roomName});
+		
+	});
+	
+	//  Leave room
+	socket.on('leave room', (data)=>{
+		socket.leave(data.room);
+	});
+	
+	//  Join new room
+	socket.on('join new room', (data)=>{
+		socket.join(data.room);
+		io.to(data.roomName).emit('newMessage', {handle: 'server', msg: data.handle + " just joined the room", room: data.room});
 	});
 	
 });
+
+
+
+
+
+
+
 
 
 //  Gracefully shut down server- what a concept!

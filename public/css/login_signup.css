@@ -1,7 +1,3 @@
-p {
-	text-align: center;
-}
-
 body {
 	background-color: beige;
 }
@@ -23,3 +19,26 @@ body {
 	background-image: linear-gradient(blue, beige);
 }
 
+#pswd-text {
+	list-style: none;
+}
+
+#login {
+	margin-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px silver solid;
+}
+
+#signup {
+	margin-top: 15px;
+	padding-bottom: 15px;
+}
+
+#signup-button {
+	margin-top: 10px;
+}
+
+#login-button {
+	margin-top: 10px;
+	
+}

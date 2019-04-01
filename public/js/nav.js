@@ -44,7 +44,7 @@ $(function(){
 			url : '/timer',
 			type : 'GET',
 			success: function(data){
-				$('#main-content').remove();
+				$('#main-container').empty();
 				$('#main-container').append(data);
 			}
 		});
@@ -53,20 +53,19 @@ $(function(){
 	
 	
 	//  race view
-	$('#nav-race').click((e)=>{
-		e.preventDefault();
-		$.ajax({
-			url: '/race',
-			type: 'GET',
-			success: (data)=>{
-				$('#main-content').remove();
-				$('#main-container').append(data);
-			}
-		});
-	});
+//	$('#nav-race').click((e)=>{
+//		e.preventDefault();
+//		$.ajax({
+//			url: '/race',
+//			type: 'GET',
+//			success: (data)=>{
+//				$('#main-content').remove();
+//				$('#main-container').append(data);
+//			}
+//		});
+//	});
+//	
 	
-	
-
 	//  profile view
 	$('#nav-profile').click(function(e){
 		e.preventDefault();
@@ -76,9 +75,9 @@ $(function(){
 			type: 'GET',
 			success: function(data){
 				//  this looks wonky when executed, should use .then / promisey stuff???
-				$('#main-content').remove();
+				$('#main-container').empty();
 				$('#main-container').append(data);
-//				$('#navbarNav').collapse('toggle');
+				//$('#navbarNav').collapse('toggle');
 			}, 
 			error: function(error){
 				console.log(error.message);
@@ -96,11 +95,9 @@ $(function(){
 				url: '/getProfile',
 				type: 'GET',
 				success: (data) =>{
-					$('#main-content').remove();
+					$('#main-container').empty();
 					$('#main-container').append(data);
 					$('#myInput').val('');
-
-					console.log(data)
 				}
 			});
 		}

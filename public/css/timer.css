@@ -1,5 +1,6 @@
-html {
-	max-height: 100vh;
+#main-content {
+	margin-left: 15px;
+	margin-right: 15px;
 }
 
 #timer-text {
@@ -27,8 +28,6 @@ html {
 	font-size: 6.3em;
 	margin: auto;
 }
-
-
 
 #scramble {
 	text-align: center;

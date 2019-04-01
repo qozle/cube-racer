@@ -1,8 +1,157 @@
+.hidden {
+	background-color: rgba(230,230,230);
+	display: none;
+}
+
+.active {
+	display: block;
+	background-color: rgba(200,200,200);
+}
+
+.col, col-10, col-12, col-2, col-6 {
+	padding: 0!important;
+}
+
+.container-fluid {
+	padding: 0!important;
+}
+
 p {
 	text-align: center;
 }
 
+/*  T I M E R  S T Y L E S  */
 
+#timer-text {
+	height: auto;
+	width: -webkit-fit-content;
+	width: -moz-fit-content;
+	width: fit-content;
+	min-width: -webkit-min-content;
+	min-width: -moz-min-content;
+	min-width: min-content;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#timer-text span {
+	/* what the heck is define? */
+	width: {define width}
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font-weight: bold;
+	font-size: 6.3em;
+	margin: auto;
+}
+
+#scramble {
+	text-align: center;
+	width: auto;
+	font-size: 1.2em;
+	font-weight: bold;
+	
+}
+
+#times-col {
+	overflow-y: scroll;
+	max-height: 221px;
+}
+
+#times-heading {
+	text-align: center;
+	background-image: linear-gradient(blue, beige);
+	margin-bottom: 0;
+}
+
+#times-list {
+	text-align: center;
+	
+}
+
+#stats-heading {
+	text-align: center;
+	background-image: linear-gradient(blue, beige);
+	margin-bottom: 0;
+}
+
+#stats {
+	text-align: center;
+}
+
+/*  C H A T  S T Y L E S  */
+#chat-container {
+/*
+	margin-top: 0;
+	padding: 0;
+	width: 100%
+*/
+}
+
+.active-tab {
+	background-color: blue!important;
+}
+
+.tab-button {
+	background-color: rgba(230,230,200);
+	border: none;
+	cursor: pointer;
+	padding: 14px 16px;
+}
+
+.tab-button:hover {
+	background-color: rgba(210,210,210)
+}
+
+/*
+.tab-button:focus {
+	outline: none;
+	background-color: rgba(240,240,240);
+}
+*/
+
+.messageBox {
+	height: 400px;
+	max-height: 400px;
+	overflow-y: scroll;
+	width: 100%;
+	padding-left: 0;
+	margin-bottom: 0;
+	background-color: rgb(245, 245, 220);
+}
+
+#chat-form {
+	margin-bottom: 0;
+}
+
+#chat-input-col {
+	padding-right: 0;
+	margin-bottom: 0;
+}
+
+#chat-button-col {
+	margin-right: 0;
+	padding-left: 0;
+}
+
+#chat-input-field {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#chat-input-button {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	padding-top: 1;
+	padding-bottom: 1;
+	border-radius: 0 !important;
+	
+}
 
 
 #logout-button {
