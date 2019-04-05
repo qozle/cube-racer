@@ -122,7 +122,6 @@ $(function(){
 			//  Pick a face as long as it's allowed
 			do {
 				face = choose(faces_index);
-				console.log(faces[face]['allowed'])
 			} while (!faces[face]['allowed'])
 			//  Make sure we don't pick the same face twice
 			faces[face]['allowed'] = false;
@@ -142,7 +141,7 @@ $(function(){
 
 		}
 
-		console.log(scramble)
+		
 
 		var moves = [ 
 			scramble.splice(0,5),
@@ -163,7 +162,7 @@ $(function(){
 			moves2[mIndex] = moves2[mIndex].slice(0, moves2[mIndex].length - 1);
 		});
 
-		console.log(moves2);
+		
 
 
 

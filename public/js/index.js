@@ -8,7 +8,7 @@ $(function(){
 			url: '/login-signup',
 			type: 'GET',
 			success: (data)=>{
-				$('#main-content').remove();
+				$('#main-container').empty();
 				$('#main-container').append(data);
 			}
 		});

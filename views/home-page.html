@@ -32,18 +32,14 @@
 		</div>
 		<!--  could do some .then() / promisey kinda stuff here  -->
 		<link rel="preload" href="css/nav.css" as="style" onload="this.rel='stylesheet'">
-		<script>
-			$.getScript('libs/auto-complete.js',()=>{
-				$.getScript('js/nav.js');				
-			});
-		</script>
+	
 	</nav>
 
 	
 	
 
 	<!--  M A I N  C O N T E N T  -->
-	<div class='container-fluid' id='main-container'>
+	<div id='main-container' class='container-fluid'>
 	
 		
 		
@@ -77,10 +73,10 @@
 					</div>
 					<!--  chat input -->
 					<div class='row'>
-						<div class='col'>
+						<div class='col' id='chat-input-col'>
 							<form class='form form-inline' id='chat-form'>
 
-								<div id='chat-input-col' class='col-10'>
+								<div id='chat-input-div' class='col-10'>
 									<input class='form-control' type='text' id='chat-input-field'>
 								</div>
 								<div id='chat-button-col' class='col-2'>
@@ -126,27 +122,20 @@
 					</div>
 				</div>
 			</div>
+		<script>
+			
+		</script>
+		<script>
+			$.getScript('/socket.io/socket.io.js', ()=>{
+				$.getScript('js/home-page.js', ()=>{
+					$.getScript('libs/auto-complete.js',()=>{
+						$.getScript('js/nav.js');
+					});		
+				});
+			});
+		</script>
 	</div>
 	
-	<script>
-		
-		$.getScript('/socket.io/socket.io.js', ()=>{
-			$.getScript('js/home-page.js');
-		});
-		
-//		$.when(
-//        $.getScript('/socket.io/socket.io.js'),
-//        $.getScript('js/home-page.js'),
-//        $.Deferred(function( deferred ){
-//			$( deferred.resolve );
-//        })
-//    ).done(function(){
-//        console.log('all scripts loaded'); 
-//    }).fail(function(error){
-//       console.log(error) 
-//    });
-	
-	</script>
 </body>
 
 

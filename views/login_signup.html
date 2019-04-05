@@ -18,10 +18,10 @@
 			<input type='email' id='email' placeholder='E-mail'>
 
 			<span id='su-passwordError'></span>
-			<input type='text' id='password' placeholder='New Password'>
+			<input type='password' id='password' placeholder='New Password'>
 
 			<span id='su-passwordConfirmError'></span>
-			<input type='text' id='passwordConfirm' placeholder='Confirm Password'>
+			<input type='password' id='passwordConfirm' placeholder='Confirm Password'>
 
 
 			<small id="passwordHelpBlock" class="form-text text-muted">
@@ -31,7 +31,7 @@
 			<h4>Birthday</h4>
 			<span id='bdayMonthError'></span>
 			<select class="custom-select mr-sm-2" id="bdayMonth">
-				<!-- use a loop to do this cleaner -->
+				<!-- use a loop to do this cleaner? -->
 				<option selected>Month</option>
 				<option value="January">January</option>
 				<option value="February">February</option>
@@ -49,49 +49,9 @@
 			<span id='bdayDayError'></span>
 			<select class="custom-select mr-sm-2" id="bdayDay">
 				<option selected>Day</option>
-				<!-- use a loop to make this cleaner -->
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-				<option value="13">13</option>
-				<option value="14">14</option>
-				<option value="15">15</option>
-				<option value="16">16</option>
-				<option value="17">17</option>
-				<option value="18">18</option>
-				<option value="19">19</option>
-				<option value="20">20</option>
-				<option value="21">21</option>
-				<option value="22">22</option>
-				<option value="23">23</option>
-				<option value="24">24</option>
-				<option value="25">25</option>
-				<option value="26">26</option>
-				<option value="27">27</option>
-				<option value="28">28</option>
-				<option value="29">29</option>
-				<option value="30">30</option>
-				<option value="31">31</option>
 			</select>
 			<span id='bdayYearError'></span>
-			<select class="custom-select mr-sm-2" id="bdayYear">
-				<!-- use a for loop to make this eaiser, this sucks -->
-				<option selected>Year</option>
-				<option value="2019">2019</option>
-				<option value="2018">2018</option>
-				<option value="2017">2017</option>
-
-			</select>
-
+			<select class="custom-select mr-sm-2" id="bdayYear"></select>
 			<input class='btn btn-primary' type='submit' id='signup-button' value='Create Account'>        
 		</form>
 	</div>
@@ -99,11 +59,13 @@
 			<!--  L O G I N  F O R M -->
 			<h1 id='li-heading' class='text-center'>Login</h1>
 			<form id='login' class='text-center'>
+				
 				<span id='li-userError'></span>
 				<input type='text' id='login-user' placeholder='E-mail or Handle'>
+				
 				<span id='li-passwordError'></span>
-				<input type='text' id='login-password' placeholder="Password">
-				<br>
+				<input type='password' id='login-password' placeholder="Password">
+				
 				<input class='btn btn-primary' type='submit' id='login-button' value='Login'>
 			</form>
 		</div>

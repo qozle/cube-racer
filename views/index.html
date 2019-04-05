@@ -32,9 +32,7 @@
 		</div>
 		<!--  R E C O R D E D  T I M E S  -->
 		<div class='col-6' id='times-col'>
-			<h5 id='times-heading'>
-				T I M E S 
-				</h5>
+			<h5 id='times-heading'>T I M E S</h5>
 			<ol class='list-group' reversed id='times-list'></ol>
 		</div>
 		<!--  S T A T S  -->
@@ -72,10 +70,13 @@
 			<script>
 				//  This should almost definitely be promisey-stuff to ensure
 				//  that the scripts get loaded in the right order. 
-				$.getScript('/js/index.js');
-				$.getScript('/libs/time-stats.js');
-				$.getScript('/js/stop-watch.js');
-				$.getScript('/js/timer.js');
+				$.getScript('/js/index.js', ()=>{
+					$.getScript('/libs/time-stats.js', ()=>{
+						$.getScript('/js/stop-watch.js', ()=>{
+							$.getScript('/js/timer.js');				
+						});					
+					});					
+				});
 			</script>
 			<link rel="preload" href="css/style.css" as="style" onload="this.rel='stylesheet'">
 		

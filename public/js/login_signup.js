@@ -1,5 +1,20 @@
 $(function(){
 	
+	//  populate form fields
+	var i;
+	for (i = 0; i <= 30; i++){
+		$('#bdayDay').append($('<option>').attr('value', i+1).text(i+1));
+	}
+	
+	for (i=1753; i<=2019; i++){
+		$('#bdayYear').prepend($('<option>').attr('value', i).text(i));
+	}
+	
+	$('#bdayYear').prepend($('<option>').attr('selected', true).text('Year'));
+	
+	
+	
+	
 	//  On login form submit
 	$('#login').submit(function(e){
 		e.preventDefault();
@@ -19,8 +34,8 @@ $(function(){
 				success: function(result){
 					var html = result.html;
 					var user = result.user;
-					$('#main-content').remove();
-					$('#main-container').append(html);
+					$('body').remove();
+					$('html').append(html);
 					localStorage.handle = user;
 				},
 				error: function(error){
@@ -73,7 +88,7 @@ $(function(){
 				type: 'POST',
 				data: signupData,
 				success: function(result){
-					$('#main-content').remove();
+					$('#main-container').empty();
 					$('#main-container').append(result);
 				},
 				error: function(error){

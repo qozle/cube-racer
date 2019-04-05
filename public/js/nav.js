@@ -103,19 +103,6 @@ $(function(){
 		}
 	});
 	
-	$('.logout').click(function(e){
-		e.preventDefault();
-		$.ajax({
-			url :'/logout',
-			type: 'GET',
-			success: function(data){
-				$('body').empty();
-				$('body').append(data);
-				localStorage.removeItem('handle');
-				socket.close();
-				$(window).off('click');
-			}
-		});
-	});
-
+	
 });
+

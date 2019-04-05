@@ -11,12 +11,10 @@ $(function(){
 	//  Get a list of all the current (eventually public) rooms
 	socket.emit('update rooms');
 	socket.on('connect', ()=>{
-		console.log(socket.id);
 		
 	});
 	socket.on('update rooms', (data)=>{
 		var rooms = data.rooms;
-		console.log(rooms);
 		$('#rooms-list').empty();
 		rooms.forEach((room, index)=>{
 			$('#rooms-list').append($('<li>').addClass('rooms-list-item').attr('id', 'room' + room).text(room))
@@ -51,8 +49,8 @@ $(function(){
 		$('#messages-container').children().removeClass('active');
 		$('#messages-container').children().addClass('hidden');
 		$('#general').addClass('active')
-		$(e.target).siblings().removeClass('active-tab');
-		$(e.target).addClass('active-tab');
+		$('#tabGeneral').siblings().removeClass('active-tab');
+		$('#tabGeneral').addClass('active-tab');
 		intervals.forEach((interval, index)=>{
 		clearInterval(interval);
 		});
@@ -154,13 +152,20 @@ $(function(){
         }
     }
 	
-	
-	
-	
-
-
-	
-	
+	$('.logout').click(function(e){
+		e.preventDefault();
+		$.ajax({
+			url :'/logout',
+			type: 'GET',
+			success: function(data){
+				socket.disconnect();
+				$('body').empty();
+				$('body').append(data);
+				localStorage.removeItem('handle');
+				$(window).off('click');
+			}
+		});
+	});	
 	
 
 	

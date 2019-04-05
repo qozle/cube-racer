@@ -8,16 +8,21 @@
 	background-color: rgba(200,200,200);
 }
 
-.col, col-10, col-12, col-2, col-6 {
-	padding: 0!important;
+.col, [class*="col-"] {
+	padding-left:0;
+	padding-right:0;
 }
 
 .row {
-	margin: 0!important;
+	margin-left:0;
+	margin-right:0;
 }
 
+/* container adjusted */
 .container-fluid {
-	padding: 0px!important;
+	width:100%;
+	max-width:none;
+	padding:0;
 }
 
 p {
@@ -34,15 +39,24 @@ p {
 */
 }
 
+#tab-container {
+	width: 100%;
+}
+
 .active-tab {
 	background-color: blue!important;
 }
 
 .tab-button {
+	display: block;
+	float: left;
 	background-color: rgba(230,230,200);
 	border: none;
 	cursor: pointer;
 	padding: 14px 16px;
+	margin-right: 0px;
+	margin-left: 0px;
+	border: 0 1px 0 0 solid silver;
 }
 
 .tab-button:hover {
@@ -77,6 +91,7 @@ p {
 	max-height: 400px;
 	width: 100%;
 	padding: 0;
+	margin-bottom: 0;
 	background-color: mintcream;
 }
 
@@ -97,6 +112,12 @@ p {
 }
 
 #chat-input-col {
+	padding-left: 0;
+	padding-right: 0;
+		
+}
+
+#chat-input-div {
 	padding: 0;
 	margin-bottom: 0;
 }
@@ -104,7 +125,7 @@ p {
 #chat-button-col {
 	margin-right: 0;
 	padding: 0;
-	padding-right: 3px;
+	padding-right: 1px;
 }
 
 #chat-input-field {
