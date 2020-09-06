@@ -24,4 +24,6 @@ Check server.js for where you'll have to provide your own credentials:
 
 For right now it's necessary to create and setup the MYSQL database:
 
-`mysql> create table users (id varchar(128), firstname varchar(25), lastname varchar(25), email varchar(50), bmonth varchar(20), bday int(31), byear int(11), handle varchar(20));` 
+`mysql> create table users (id varchar(128), firstname varchar(25), lastname varchar(25), email varchar(50), bmonth varchar(20), bday int(31), byear int(11), handle varchar(20));`
+
+Check server.js for where to put in MYSQL credentials.
